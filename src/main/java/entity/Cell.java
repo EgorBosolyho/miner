@@ -54,9 +54,4 @@ public class Cell {
     public void setRightValue(String rightValue) {
         this.rightValue = rightValue;
     }
-
-    @Override
-    public String toString() {
-        return value;
-    }
 }

@@ -10,29 +10,10 @@
       width: 30px;
       height: 30px;
     }
-
-    /**{*/
-      /*padding: 0;*/
-      /*margin:0;*/
-    /*}*/
   </style>
 
 
   <script>
-
-      $(document).ready(function () {
-          $('button').on('mousedown', function (event) {
-              var keycode = ( event.keyCode ? event.keyCode : event.which );
-              if (keycode === 3) {
-                  //your right click code goes here
-                  alert("dada");
-              }
-          });
-      });
-
-
-
-
       function move(lineId,cellId) {
           $.ajax({
               type: 'GET',
@@ -55,16 +36,20 @@
       }
 
       function paintField(data){
-          $('#fieldDiv').html('');
-          $.each(data.field, function (key, val) {
-              $('#fieldDiv').append('<br>');
-              $.each(val, function (keyLine, valLine) {
-                  $.each(valLine, function (keyCell, valCell) {
-                      var $value = valCell.open ? valCell.value : valCell.rightValue;
-                      $('#fieldDiv').append('<button class="button" oncontextmenu="func('+valCell.lineId+','+valCell.cellId+'); return false;" onclick="move('+valCell.lineId+','+valCell.cellId+')">'+$value+'</button>');
+          if (data != "") {
+              $('#fieldDiv').html('');
+              $.each(data.field, function (key, val) {
+                  $('#fieldDiv').append('<br>');
+                  $.each(val, function (keyLine, valLine) {
+                      $.each(valLine, function (keyCell, valCell) {
+                          var $value = valCell.open ? valCell.value : valCell.rightValue;
+                          $('#fieldDiv').append('<button class="button" oncontextmenu="func(' + valCell.lineId + ',' + valCell.cellId + '); return false;" onclick="move(' + valCell.lineId + ',' + valCell.cellId + ')">' + $value + '</button>');
+                      });
                   });
               });
-          });
+          }
+          console.log(${sessionScope.get("checkWin")});
+          $('#checkWin').append(${sessionScope.get("checkWin")});
       }
 
       function func(lineId,cellId){
@@ -85,6 +70,8 @@
   <input type="button" value="get" onclick="reset()"/>
   <div id="fieldDiv">
   </div>
+
+  <h2 id="checkWin" align="center"></h2>
 
 </body>
 </html>

@@ -19,12 +19,14 @@ public class CreateField {
         return field;
     }
 
-    private List<Cell> listCell = new ArrayList<Cell>();
+    private List<Cell> listCell;
 
     public CreateField() {
     }
 
     public void create(){
+        field.setField(new ArrayList<>());
+        listCell = new ArrayList<Cell>();
          for(int i = 0; i<field.getSize(); i++){
              Line line = new Line();
              for(int j = 0; j<field.getSize(); j++){
@@ -57,9 +59,8 @@ public class CreateField {
     }
 
     private void addValue(){
-        for(int i = 0; i<listCell.size(); i++){
-            Cell cell = listCell.get(i);
-            if(cell.getValue().equals("")){
+        for (Cell cell : listCell) {
+            if (cell.getValue().equals("")) {
                 int mineArround = mineArround(cell);
                 cell.setValue(Integer.toString(mineArround));
             }
@@ -70,10 +71,9 @@ public class CreateField {
         int count = 0;
         int lineId = cell.getLineId();
         int cellId = cell.getCellId();
-        for(int i = 0; i<listCell.size(); i++){
-            Cell cellFromList = listCell.get(i);
-            if(listId(lineId).contains(cellFromList.getLineId()) && listId(cellId).contains(cellFromList.getCellId())){
-                if(cellFromList.getValue().equals("b")){
+        for (Cell cellFromList : listCell) {
+            if (listId(lineId).contains(cellFromList.getLineId()) && listId(cellId).contains(cellFromList.getCellId())) {
+                if (cellFromList.getValue().equals("b")) {
                     count++;
                 }
             }
@@ -91,9 +91,9 @@ public class CreateField {
 
     public Cell getCellById(int lineId, int cellId){
         Cell cell = new Cell();
-        for(int i = 0; i<listCell.size(); i++){
-            cell = listCell.get(i);
-            if(cell.getLineId()==lineId && cell.getCellId()==cellId){
+        for (Cell aListCell : listCell) {
+            cell = aListCell;
+            if (cell.getLineId() == lineId && cell.getCellId() == cellId) {
                 break;
             }
         }
@@ -113,6 +113,17 @@ public class CreateField {
         }
     }
 
-
+    public String checkWin(){
+        int count = listCell.size();
+        for (Cell aListCell: listCell){
+            if(aListCell.isOpen()){
+                count--;
+            }
+            if(!aListCell.getRightValue().equals("") && aListCell.getRightValue().equals("b")){
+                count--;
+            }
+        }
+        return count==0 ? "You win!!!" : "";
+    }
 
 }

@@ -1,7 +1,5 @@
 package entity;
 
-import org.springframework.context.annotation.Bean;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,6 @@ public class Field {
 
     public Field(Integer size) {
         this.size = size;
-        System.out.println("бин поля создался");
     }
 
     public Field() {
@@ -33,13 +30,5 @@ public class Field {
 
     public void setSize(Integer size) {
         this.size = size;
-    }
-
-    @Override
-    public String toString() {
-        return "Field{" +
-                "field=" + field +
-                ", size=" + size +
-                '}';
     }
 }

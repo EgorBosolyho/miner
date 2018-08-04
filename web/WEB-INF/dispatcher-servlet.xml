@@ -23,12 +23,24 @@
     <!--</bean>-->
 
     <bean id="field" class="entity.Field">
-        <constructor-arg name="size" value="9"/>
+        <constructor-arg name="size" value="4"/>
     </bean>
 
     <bean id="logic" class="logic.CreateField">
         <property name="field" ref="field"/>
     </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/field/move"/>
+            <bean class="filters.CheckMove"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/field/right"/>
+            <bean class="filters.CheckRight"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 

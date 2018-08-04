@@ -16,9 +16,4 @@ public class Line {
     public void setLine(List<Cell> line) {
         this.line = line;
     }
-
-    @Override
-    public String toString() {
-        return line.toString();
-    }
 }
