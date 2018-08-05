@@ -18,7 +18,8 @@ public class CheckRight implements HandlerInterceptor {
         int lineId = Integer.parseInt(httpServletRequest.getParameter("lineId"));
         int cellId = Integer.parseInt(httpServletRequest.getParameter("cellId"));
         Cell cell = createField.getCellById(lineId,cellId);
-        return !cell.isOpen();
+        boolean checkWin = createField.getField().getCheckWin().equals("");
+        return !cell.isOpen() && checkWin;
     }
 
     @Override

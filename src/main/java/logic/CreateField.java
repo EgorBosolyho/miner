@@ -16,6 +16,7 @@ public class CreateField {
         this.field = field;
     }
     public Field getField() {
+        checkWin();
         return field;
     }
 
@@ -26,6 +27,7 @@ public class CreateField {
 
     public void create(){
         field.setField(new ArrayList<>());
+        field.setCheckWin("");
         listCell = new ArrayList<Cell>();
          for(int i = 0; i<field.getSize(); i++){
              Line line = new Line();
@@ -101,29 +103,36 @@ public class CreateField {
     }
 
     public void userMove(int lineId, int cellId){
-        getCellById(lineId,cellId).setOpen(true);
+        Cell cell = getCellById(lineId,cellId);
+        cell.setOpen(true);
+        if(cell.getValue().equals("b")){
+            field.setCheckWin("Вы проиграли!!!");
+        }
     }
 
     public void userRight(int lineId, int cellId){
         Cell cell = getCellById(lineId,cellId);
         if(cell.getRightValue().equals("")){
-            cell.setRightValue("!");
+            cell.setRightValue("?");
         } else {
             cell.setRightValue("");
         }
     }
 
-    public String checkWin(){
+    public void checkWin(){
         int count = listCell.size();
         for (Cell aListCell: listCell){
             if(aListCell.isOpen()){
                 count--;
             }
-            if(!aListCell.getRightValue().equals("") && aListCell.getRightValue().equals("b")){
+            if(!aListCell.getRightValue().equals("") && aListCell.getValue().equals("b")){
                 count--;
             }
         }
-        return count==0 ? "You win!!!" : "";
+        System.out.println(count);
+        if(field.getCheckWin().equals("") && count==0){
+            field.setCheckWin("Вы победили!!!");
+        }
     }
 
 }

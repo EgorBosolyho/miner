@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class CheckMove implements HandlerInterceptor {
     @Resource
@@ -19,7 +18,8 @@ public class CheckMove implements HandlerInterceptor {
         int lineId = Integer.parseInt(httpServletRequest.getParameter("lineId"));
         int cellId = Integer.parseInt(httpServletRequest.getParameter("cellId"));
         Cell cell = createField.getCellById(lineId,cellId);
-        return cell.getRightValue().equals("") && !cell.isOpen();
+        boolean checkWin = createField.getField().getCheckWin().equals("");
+        return cell.getRightValue().equals("") && !cell.isOpen() && checkWin;
     }
 
     @Override

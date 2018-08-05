@@ -23,7 +23,7 @@
     <!--</bean>-->
 
     <bean id="field" class="entity.Field">
-        <constructor-arg name="size" value="4"/>
+        <constructor-arg name="size" value="5"/>
     </bean>
 
     <bean id="logic" class="logic.CreateField">

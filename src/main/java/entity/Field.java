@@ -8,12 +8,21 @@ import java.util.List;
 public class Field {
     private List<Line> field = new ArrayList<Line>();
     private Integer size;
+    private String checkWin = "";
 
     public Field(Integer size) {
         this.size = size;
     }
 
     public Field() {
+    }
+
+    public String getCheckWin() {
+        return checkWin;
+    }
+
+    public void setCheckWin(String checkWin) {
+        this.checkWin = checkWin;
     }
 
     public List<Line> getField() {
